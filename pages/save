@@ -1,0 +1,25 @@
+import withAuth from '../auth/withAuth';
+import { useUser } from '../auth/useUser';
+import style from './Nav.module.css';
+const Private = () => {
+  const { user, logout } = useUser();
+
+  return (
+    <div >
+      <nav className={style.Nav} >
+             <a className={style.Logo} href="/">SHOP&CUSTOM</a>
+      <a className={style.Logout} href="#" onClick={() => logout()} >LOGOUT</a>
+      </nav>
+      <div col='5px'>{
+        user?.email &&
+        <div>
+          <div>Email: {user.email}</div>
+          <button onClick={() => logout()}>Logout</button>
+        </div> 
+      }</div>
+    </div>
+  )
+  
+}
+
+export default withAuth(Private);

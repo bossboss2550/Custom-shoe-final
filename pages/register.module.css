@@ -1,0 +1,84 @@
+.box{
+    text-align: center;
+}
+
+.link{
+    color: rgb(31, 45, 245);
+    cursor: pointer;
+}
+
+.container{
+    display: flex;
+    margin-top: 2rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+
+.loginbox {
+    background: #FFB830;
+    border: 3px solid currentColor;
+    padding: 20px 100px 20px 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    width: 400px;
+    height: 60%;
+    font-size: 20px;
+    border-radius: 5px;
+}
+.loginbox2 {
+    background: #FFB830;
+    padding: 0px 100px 20px 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    width: 400px;
+    height: 60%;
+    font-size: 20px;
+    border-radius: 5px;
+}
+
+.fromgroup {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+}
+
+
+.input {
+    font-size: 16px;
+    width: 300px;
+    height: 40px;
+    padding: 16px;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+    display: block;
+    border: 3px solid currentColor;
+    color: currentColor;
+    background: transparent;
+    border-radius: var(--size-radius);
+      
+} 
+
+.button {
+    outline: none;
+    background: rgb(0, 0, 0);
+    color: #fff;
+    padding: 16px;
+    display: block;
+    width: 100%;
+    border: none;
+    text-transform: uppercase;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+}

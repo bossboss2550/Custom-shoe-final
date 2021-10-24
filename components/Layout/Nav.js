@@ -2,6 +2,7 @@ import style from './Nav.module.css'
 import { useUser } from '../../auth/useUser';
 import 'firebase/auth';
 import Link from 'next/link'
+import AccountMenu from './Accmenu';
 
 function Nav() {
     const { user, logout } = useUser();
@@ -27,7 +28,8 @@ function Nav() {
                     <Link href='/'><a>SHOP&CUSTOM</a></Link>
                 </div>
                 <div className={style.Logout} >
-                    <Link href='/'><a onClick={() => logout()}>LOGOUT</a></Link>
+                    {/* <Link href='/'><a onClick={() => logout()}>LOGOUT</a></Link> */}
+                    <AccountMenu/>
                 </div>
             </nav>
         )

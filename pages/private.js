@@ -2,6 +2,7 @@ import withAuth from '../auth/withAuth';
 import { useUser } from '../auth/useUser';
 // import style from './Css/Nav.module.css';
 import Getdata from '../components/Getdata';
+import Profile from '../components/Profile';
 
 const Private = () => {
   const { user, logout } = useUser();
@@ -13,8 +14,8 @@ const Private = () => {
         // <div>
         //   <div>Email: {user.email}</div>
         //   <button onClick={() => logout()}>Logout</button>
-          <Getdata/>
-          
+         <Getdata/>
+          // <Profile/>
         // </div> 
       }</div>
     </div>

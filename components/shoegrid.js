@@ -20,27 +20,6 @@ export default function Gridshoe() {
           <Grid item xs={3}>
           <MultiActionAreaCard/>
           </Grid>
-          <Grid item xs={3}>
-          <MultiActionAreaCard/>
-          </Grid>
-          <Grid item xs={3}>
-          <MultiActionAreaCard/>
-          </Grid>
-          <Grid item xs={3}>
-          <MultiActionAreaCard/>
-          </Grid>
-          <Grid item xs={3}>
-          <MultiActionAreaCard/>
-          </Grid>
-          <Grid item xs={3}>
-          <MultiActionAreaCard/>
-          </Grid>
-          <Grid item xs={3}>
-          <MultiActionAreaCard/>
-          </Grid>
-          <Grid item xs={3}>
-          <MultiActionAreaCard/>
-          </Grid>
         </Grid>
             </Box>
         </Container>

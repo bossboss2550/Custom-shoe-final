@@ -17,7 +17,7 @@ const rows = [
   createData('NIKE AIR JORDAN', 12123, "4,500","-",<Cancel/>),
   createData('CONVERS ALL STAR', 10235, "3,500","TH05715456412",<Check/>),
   createData('VAN OLD SCHOOL', 2535, "4,000","TH05491912316",<Check/>),
-  createData('CONVERS ALL STAR', 2535, "4,300","-",<Cancel/>),
+  createData('CONVERS ALL STAR2', 2535, "4,300","-",<Cancel/>),
 ];
 
 export default function OrderTable() {

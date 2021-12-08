@@ -6,20 +6,23 @@ import { useUser } from '../auth/useUser'
 import 'firebase/app'
 import MultiActionAreaCard from '../components/shoelist'
 import Gridshoe from '../components/shoegrid';
-
+import {useRouter} from 'next/router';
+import Link from 'next/link'
 export default function Index() {
+
 
   const { user, logout } = useUser()
   console.log(user)
+
   if (user) {
     
     return (
       <div >
-        <Gridshoe/>
+         <Link href='/signin'><Gridshoe/></Link>
             {/* <h3>{user.Name}</h3>
             <h3>{user.email}</h3> */}
             {/* <GetData /> */}
-            <Readdata/>
+            {/* <Readdata/> */}
             
          
       </div>

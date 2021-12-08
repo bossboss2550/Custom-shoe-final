@@ -4,15 +4,15 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
-
+import Link from 'next/link'
 export default function MultiActionAreaCard() {
-  return (
+  return (<Link href='/show'>
     <Card sx={{ maxWidth: 300 }}>
       <CardActionArea>
         <CardMedia
           component="img"
           height="140"
-          image="https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/f094af40-f82f-4fb9-a246-e031bf6fc411/%E0%B8%A3%E0%B8%AD%E0%B8%87%E0%B9%80%E0%B8%97%E0%B9%89%E0%B8%B2%E0%B8%9C%E0%B8%B9%E0%B9%89-air-force-1-07-NMmm1B.png"
+          image="https://media.discordapp.net/attachments/641280973543309342/917461937233748018/R1.png?width=1401&height=670"
           alt="green iguana"
         />
         <CardContent>
@@ -30,6 +30,6 @@ export default function MultiActionAreaCard() {
           Share
         </Button>
       </CardActions>
-    </Card>
+    </Card></Link>
   );
 }

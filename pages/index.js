@@ -8,17 +8,19 @@ import MultiActionAreaCard from '../components/shoelist'
 import Gridshoe from '../components/shoegrid';
 import {useRouter} from 'next/router';
 import Link from 'next/link'
+import shoeinfo from './api/shoedata';
+
 export default function Index() {
-
-
   const { user, logout } = useUser()
   console.log(user)
+
+ 
 
   if (user) {
     
     return (
       <div >
-         <Link href='/signin'><Gridshoe/></Link>
+         <Gridshoe/>
             {/* <h3>{user.Name}</h3>
             <h3>{user.email}</h3> */}
             {/* <GetData /> */}

@@ -4,32 +4,43 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
-import Link from 'next/link'
-export default function MultiActionAreaCard() {
-  return (<Link href='/show'>
-    <Card sx={{ maxWidth: 300 }}>
+
+import { useRouter } from 'next/router';
+export default function MultiActionAreaCard(props) {
+  const { shoegrid } = props;
+  const router = useRouter();
+  function swapPage(id) {
+    router.push({
+       pathname: '/show/[id]',
+       query: {
+          id: id,
+       }
+    })
+ }
+  return (
+    
+    <Card sx={{ maxWidth: 300 }} onClick={()=> {swapPage(shoegrid.id)}}>
       <CardActionArea>
         <CardMedia
           component="img"
           height="140"
-          image="https://media.discordapp.net/attachments/641280973543309342/917461937233748018/R1.png?width=1401&height=670"
-          alt="green iguana"
+          image={shoegrid.picUrl}
+          
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
-            Custom
+            {shoegrid.brand}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continents except Antarctica
+            {shoegrid.info}
           </Typography>
         </CardContent>
       </CardActionArea>
       <CardActions>
         <Button size="small" color="primary">
-          Share
+          {shoegrid.price}฿
         </Button>
       </CardActions>
-    </Card></Link>
+    </Card>
   );
 }

@@ -5,9 +5,9 @@ import { useState } from 'react'
 
 
 export default function App(props) {
-  
-  const [id,setId] = useState(props.id)
-  function R7( {...props}) {
+
+  const [id, setId] = useState(props.id)
+  function R7({ ...props }) {
 
     const group = useRef()
     const { nodes, materials } = useGLTF(`/R${id}.glb`)

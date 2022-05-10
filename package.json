@@ -23,6 +23,7 @@
     "@react-three/fiber": "^7.0.21",
     "@types/three": "^0.134.0",
     "bootstrap": "^5.1.0",
+    "cors": "^2.8.5",
     "css": "^3.0.0",
     "emotion-theming": "^11.0.0",
     "firebase": "^8.10.0",

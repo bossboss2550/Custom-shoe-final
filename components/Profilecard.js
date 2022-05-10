@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
@@ -20,74 +19,95 @@ import Paper from '@mui/material/Paper';
 import style from "../pages/register.module.css";
 import TabPanel from './Tabpro';
 import { useUser } from '../auth/useUser';
-
+import React, { useEffect, useState } from 'react';
+import firebase from 'firebase/app'
+import { useRouter } from 'next/router';
 
 const ExpandMore = styled((props) => {
-    
-    const { expand, ...other } = props;
-    return <IconButton {...other} />;
+
+  const { expand, ...other } = props;
+  return <IconButton {...other} />;
 })(({ theme, expand }) => ({
-    transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
-    marginLeft: 'auto',
-    transition: theme.transitions.create('transform', {
-        duration: theme.transitions.duration.shortest,
-    }),
+  transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
+  marginLeft: 'auto',
+  transition: theme.transitions.create('transform', {
+    duration: theme.transitions.duration.shortest,
+  }),
 }));
 
 export default function RecipeReviewCard() {
-    const { user, logout } = useUser()
-    const paperstyle={padding:20, height:'70vh',width:280, margin:"20px auto"};
-    const [expanded, setExpanded] = React.useState(false);
+  const { user, logout } = useUser()
+  const paperstyle = { padding: 20, height: '70vh', width: 280, margin: "20px auto" };
+  const [expanded, setExpanded] = React.useState(false);
+  const [profile, setProfile] = useState(null)
 
-    const handleExpandClick = () => {
-        setExpanded(!expanded);
-    
-    };
-    
-if(user){return (
-       
-    
-    <Grid item xs={10} >
-<Card sx={{ maxWidth: 1280 }}>
-  <CardHeader
-  action={
-    <IconButton aria-label="settings">
-      <MoreVertIcon />
-    </IconButton>
-  }
-  title={user.email}
-  subheader="@username"
-    avatar={
-      <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe"
-      sx={{ width: 136, height: 136 }}>
-        B
-      </Avatar>
+  useEffect(() => {
+    if (user) {
+      firebase
+        .firestore()
+        .collection('User')
+        .doc(user.id)
+        .get({})
+        .then(doc => {
+          setProfile(doc.data())
+        }).catch(() => {
+
+        })
+
     }
-  />
-  
-  <CardContent>
-      <TabPanel/>
-    
-  </CardContent>
-  <CardActions disableSpacing>
-  
-      
-    
-   
-      
-  </CardActions>
-</Card>
-</Grid>
-);}
-else return (
+  }, [user])
+  console.log(profile)
+  const handleExpandClick = () => {
+    setExpanded(!expanded);
+
+  };
+
+  if (user && profile) {
+    return (
+
+
+      <Grid item xs={10} >
+        <Card sx={{ maxWidth: 1280 }}>
+          <CardHeader
+            action={
+              <IconButton aria-label="settings">
+                <MoreVertIcon />
+              </IconButton>
+            }
+            title={user.email}
+            subheader={profile.Name}
+            avatar={
+              <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe"
+                sx={{ width: 136, height: 136 }}>
+                B
+              </Avatar>
+            }
+          />
+
+          <CardContent>
+            <TabPanel />
+
+          </CardContent>
+          <CardActions disableSpacing>
+
+
+
+
+
+          </CardActions>
+        </Card>
+      </Grid>
+    );
+  }
+  else return (
     <>
-    <main >
-      {/* <GetData />
+      <main >
+        {/* <GetData />
       <Readdata/> */}
-      
-    </main>
+
+      </main>
     </>
   )
 
-    
+
 }

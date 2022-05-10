@@ -9,10 +9,10 @@ export default function Show() {
     return (
         <div className={style.container2}>
             <div className={style.loginbox3}>
-           <Shoemodel/>
+                <Shoemodel />
+            </div>
         </div>
-        </div>
-      
+
     )
 
-  }
+}

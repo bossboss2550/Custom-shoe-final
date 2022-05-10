@@ -1,11 +1,11 @@
-// import Nav from '../components/Nav';
-// import Cardindex from './Card';
 
-// function App () {
-//   return (
-//       <Nav/>
-    
-//   )
-// }
+import Customeshoe from '../components/Customshoe';
 
-// export default App;
+function App() {
+    return (
+
+        <Customeshoe />
+    )
+}
+
+export default App;

@@ -16,18 +16,18 @@ var j = '5';
 
 function Model({ ...props }) {
     const group = useRef()
-    const texture1 = new THREE.TextureLoader().load('./F/1-1.png');
-    const texture2 = new THREE.TextureLoader().load('');
+    const texture1 = new THREE.TextureLoader().load('https://firebasestorage.googleapis.com/v0/b/customporject.appspot.com/o/images%2Fimage0.png?alt=media&token=af7aec36-9915-4e5f-9c5b-989fe8850a6a');
+    const texture2 = new THREE.TextureLoader().load('https://cdn.pixabay.com/photo/2018/09/30/16/26/sun-3713835__340.jpg');
     const texture3 = new THREE.TextureLoader().load('');
     const texture4 = new THREE.TextureLoader().load('');
-    const texture5 = new THREE.TextureLoader().load('./pic/5.png');
-    const texture6 = new THREE.TextureLoader().load('./pic/6.png');
-    const texture7 = new THREE.TextureLoader().load('./pic/7.png');
-    const texture8 = new THREE.TextureLoader().load('./pic/8.png');
-    const texture9 = new THREE.TextureLoader().load('./pic/9.png');
-    const texture10 = new THREE.TextureLoader().load('./pic/10.png');
-    const texture11 = new THREE.TextureLoader().load('./pic/11.png');
-    const texture12 = new THREE.TextureLoader().load('./pic/12.png');
+    const texture5 = new THREE.TextureLoader().load('');
+    const texture6 = new THREE.TextureLoader().load('');
+    const texture7 = new THREE.TextureLoader().load('');
+    const texture8 = new THREE.TextureLoader().load('');
+    const texture9 = new THREE.TextureLoader().load('');
+    const texture10 = new THREE.TextureLoader().load('');
+    const texture11 = new THREE.TextureLoader().load('');
+    const texture12 = new THREE.TextureLoader().load('');
 
     const material1 = new THREE.MeshBasicMaterial({ map: texture1 });
     const material2 = new THREE.MeshBasicMaterial({ map: texture2 });

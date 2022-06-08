@@ -77,8 +77,7 @@ export default function RecipeReviewCard() {
             title={user.email}
             subheader={profile.Name}
             avatar={
-              <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe"
-                sx={{ width: 136, height: 136 }}>
+              <Avatar aria-label="recipe" sx={{ width: 136, height: 136 }}>
                 B
               </Avatar>
             }
@@ -89,11 +88,6 @@ export default function RecipeReviewCard() {
 
           </CardContent>
           <CardActions disableSpacing>
-
-
-
-
-
           </CardActions>
         </Card>
       </Grid>

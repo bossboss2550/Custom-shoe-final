@@ -7,31 +7,31 @@ import Grid from '@mui/material/Grid';
 import shoeinfo from '../pages/api/shoedata';
 export default function Gridshoe() {
 
-const shoegridElements = shoeinfo.map((shoegrid, index) => {
-  return <Grid item xs={3}>
-  <MultiActionAreaCard key={index} shoegrid={shoegrid}/>
-  </Grid> 
+  const shoegridElements = shoeinfo.map((shoegrid, index) => {
+    return <Grid item xs={3}>
+      <MultiActionAreaCard key={index} shoegrid={shoegrid} />
+    </Grid>
 
-})
-      return (
-      
-        <div >
-          <br/>
-          <React.Fragment>
+  })
+  return (
+
+    <div >
+      <br />
+      <React.Fragment>
         <CssBaseline />
         <Container maxWidth="xl" max>
-        
+
           <Box sx={{ bgcolor: '#FEF9EF', height: '100vh' }} >
-          <Grid container spacing={3}>
-          {shoegridElements}
-        </Grid>
-            </Box>
+            <Grid container spacing={3}>
+              {shoegridElements}
+            </Grid>
+          </Box>
         </Container>
       </React.Fragment>
-           
-        </div>
-        
-      )
-      
-    
-    }
+
+    </div>
+
+  )
+
+
+}

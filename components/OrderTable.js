@@ -18,7 +18,6 @@ import { useRouter } from 'next/router'
 import 'firebase/storage'
 
 
-
 export default function OrderTable() {
   const { user, logout } = useUser()
   const paperstyle = { padding: 20, height: '70vh', width: 280, margin: "20px auto" };
@@ -30,31 +29,27 @@ export default function OrderTable() {
     firebase
       .firestore()
       .collection('Order')
+      .orderBy("Date", "desc")
       .where("Email", "==", user.email)
       .get()
       .then(querySnapshot => {
-        querySnapshot.forEach((doc) => {
-          setProfile(doc.data())
+        const Data = []
+        querySnapshot.forEach((doc, index) => {
+          Data.push(doc.data())
+
         });
+        setProfile(Data)
       }).catch((error) => {
         console.log(error)
       })
-
 
   }, [user])
   const handleExpandClick = () => {
     setExpanded(!expanded);
 
   };
-  if (user && profile) {
-    console.log(profile)
-    function createData(type, email, price, track, status) {
-      return { type, email, price, track, status };
-    }
-    const rows = [
-      createData(profile.Type, profile.Email, profile.Price, profile.Tracking, <Check />),
-    ];
 
+  if (user && profile) {
     return (
       <TableContainer component={Paper} >
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -68,18 +63,17 @@ export default function OrderTable() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
+            {profile.map((row, index) => (
               <TableRow
-                key={row.type}
-                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-              >
+                key={`${row.Price}-${index}`}
+                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                 <TableCell component="th" scope="row">
-                  {row.type}
+                  {row.Type}
                 </TableCell>
-                <TableCell align="right">{row.email}</TableCell>
-                <TableCell align="right">{row.price}</TableCell>
-                <TableCell align="right">{row.track}</TableCell>
-                <TableCell align="right">{row.status}</TableCell>
+                <TableCell align="right">{row.Email}</TableCell>
+                <TableCell align="center">{row.Price}</TableCell>
+                <TableCell align="center">{row.Tracking}</TableCell>
+                <TableCell align="center"><Check /></TableCell>
               </TableRow>
             ))}
           </TableBody>

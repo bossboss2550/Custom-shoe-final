@@ -31,7 +31,6 @@ const GetOrder = () => {
 
         }
     }, [user])
-    console.log(profile)
     const handleExpandClick = () => {
         setExpanded(!expanded);
 

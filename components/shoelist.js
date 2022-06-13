@@ -11,34 +11,34 @@ export default function MultiActionAreaCard(props) {
   const router = useRouter();
   function swapPage(id) {
     router.push({
-       pathname: '/show/[id]',
-       query: {
-          id: id,
-       }
+      pathname: '/show/[id]',
+      query: {
+        id: id,
+      }
     })
- }
+  }
   return (
-    
-    <Card sx={{ maxWidth: 300 }} onClick={()=> {swapPage(shoegrid.id)}}>
+
+    <Card sx={{ maxWidth: 300 }} onClick={() => { swapPage(shoegrid.id) }}>
       <CardActionArea>
         <CardMedia
           component="img"
           height="140"
           image={shoegrid.picUrl}
-          
+
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
-            {shoegrid.brand}
+            {shoegrid.info}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            {shoegrid.info}
+            {shoegrid.brand}
           </Typography>
         </CardContent>
       </CardActionArea>
       <CardActions>
         <Button size="small" color="primary">
-          {shoegrid.price}฿
+          {shoegrid.price}
         </Button>
       </CardActions>
     </Card>

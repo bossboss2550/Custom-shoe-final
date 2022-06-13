@@ -3,14 +3,14 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 import initFirebase from '../config';
 import { setUserCookie } from '../auth/userCookie';
-import { mapUserData } from '../auth/useUser';
+import { mapUserData } from '../auth/mapUserData';
 import style from './register.module.css'
-import {useRouter} from 'next/router';
+import { useRouter } from 'next/router';
 
 initFirebase();
 const firebaseAuthConfig = ({ signInSuccessUrl }) => ({
 
-  
+
   signInFlow: 'popup',
   signInOptions: [
     {
@@ -25,7 +25,7 @@ const firebaseAuthConfig = ({ signInSuccessUrl }) => ({
     signInSuccessWithAuthResult: async ({ user }, redirectUrl) => {
       const userData = await mapUserData(user);
       setUserCookie(userData);
-    } 
+    }
   }
 });
 
@@ -33,7 +33,7 @@ const FirebaseAuth = () => {
   const signInSuccessUrl = "/"
   const router = useRouter();
   function clickRegis() {
-      router.push('/register')
+    router.push('/register')
   }
   return (
     <div>
@@ -43,7 +43,7 @@ const FirebaseAuth = () => {
         signInSuccessUrl={signInSuccessUrl}
       />
       <div className={style.box}>
-      <h5>ยังไม่มีบัญชี ? <a onClick={clickRegis} className={style.link}>สมัครเลย !!</a></h5>
+        <h5>ยังไม่มีบัญชี ? <a onClick={clickRegis} className={style.link}>สมัครเลย !!</a></h5>
       </div>
     </div>
   );

@@ -3,14 +3,14 @@ const shoeinfo = [{
     brand: "Nike Air Force1",
     picUrl: "R1.png",
     info: "Galaxy",
-    price: "3000",
+    price: "Example",
 },
 {
     id: "2",
     brand: "Nike Air Force1",
     picUrl: "R2.png",
     info: "Leopard",
-    price: "3000",
+    price: "Example",
 
 },
 {
@@ -18,7 +18,7 @@ const shoeinfo = [{
     brand: "Nike Air Force1",
     picUrl: "R3.png",
     info: "Art",
-    price: "3000",
+    price: "Example",
 
 },
 {
@@ -26,7 +26,7 @@ const shoeinfo = [{
     brand: "Nike Air Force1",
     picUrl: "R4.png",
     info: "Pastel1",
-    price: "3000",
+    price: "Example",
 
 },
 {
@@ -34,7 +34,7 @@ const shoeinfo = [{
     brand: "Nike Air Force1",
     picUrl: "R5.png",
     info: "Pastel2",
-    price: "3000",
+    price: "Example",
 
 },
 {
@@ -42,9 +42,10 @@ const shoeinfo = [{
     brand: "Nike Air Force1",
     picUrl: "R6.png",
     info: "Something",
-    price: "3000",
+    price: "Example",
 
 },
+
 ];
 
 export default shoeinfo;

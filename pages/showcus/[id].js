@@ -1,17 +1,16 @@
 
 import style from "../register.module.css"
-import Shoemodel from "../../components/shoesmodel";
+import Custom from "../../components/ShowOrder";
 import { useRouter } from "next/router";
-const Modelshow = () => {
+const UserId = () => {
     const router = useRouter()
     const { id } = router.query
     return <>
-
         <div className={style.container2}>
             <div className={style.loginbox3}>
-                <Shoemodel id={id} />
+                <Custom id={id} />
             </div>
         </div>
     </>
 }
-export default Modelshow
+export default UserId

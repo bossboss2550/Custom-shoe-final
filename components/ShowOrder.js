@@ -7,46 +7,50 @@ import firebase from 'firebase/app'
 import { useRouter } from 'next/router'
 import 'firebase/storage'
 import { useUser } from '../auth/useUser'
-import style from "../pages/register.module.css";
-import TextField, { TextFieldProps } from "@mui/material/TextField";
-import { alpha, styled } from "@mui/material/styles";
-import Swal from "sweetalert2";
+import { useEffect } from 'react'
 
-export default function App2(props) {
 
+export default function Custom(props) {
     const router = useRouter()
     const { user } = useUser()
-    var today = new Date()
-    var minutes = today.getMinutes();
-    minutes = minutes > 9 ? minutes : '0' + minutes;
-    var sec = today.getSeconds()
-    sec = sec > 9 ? sec : '0' + sec;
+    const { id } = props
+    const [profile, setProfile] = useState(null)
 
-    var time = today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear() + '  ' + today.getHours() + ':' + minutes + ':' + sec;
+    useEffect(() => {
+        if (!user || !user.email) return;
+        async function ft() {
+            const docRefImage = firebase.firestore().collection("Model").doc(id);
+            var tagImage = await docRefImage.get().then(async (doc) => {
+                setProfile(doc.data())
+            })
+        }
 
-    const [Front, setFront] = useState(props.Front);
-    const [Midside, setMidside] = useState(props.Midside);
-    const [Side, setSide] = useState(props.Side);
-    const [Up, setUp] = useState(props.Up);
-    const [Back, setBack] = useState(props.Back);
-    const [Down, setDown] = useState(props.Down);
-    const [Topic, setTopic] = useState(props.Topic);
+        ft()
+
+
+
+    }, [user])
+    const handleExpandClick = () => {
+        setExpanded(!expanded);
+
+    };
+    const [Name, setName] = useState("");
     function Model({ ...props }) {
 
 
         const group = useRef()
-        const texture1 = new THREE.TextureLoader().load(Front); //หน้าล่าง
-        const texture2 = new THREE.TextureLoader().load(Midside); //ข้างกลาง
-        const texture3 = new THREE.TextureLoader().load(Midside); //ข้างกลาง
-        const texture4 = new THREE.TextureLoader().load(Side); //ข้างริม
-        const texture5 = new THREE.TextureLoader().load(Side); //ข้างริม
+        const texture1 = new THREE.TextureLoader().load(profile.urltexfront); //หน้าล่าง
+        const texture2 = new THREE.TextureLoader().load(profile.urltexmidside); //ข้างกลาง
+        const texture3 = new THREE.TextureLoader().load(profile.urltexmidside); //ข้างกลาง
+        const texture4 = new THREE.TextureLoader().load(profile.urltexside); //ข้างริม
+        const texture5 = new THREE.TextureLoader().load(profile.urltexside); //ข้างริม
         const texture6 = new THREE.TextureLoader().load('https://by3302files.storage.live.com/y4mEhB17xuDvdzGmcbwmGcnaST6Q5aIzO9l9WISXoJvE6teOaZOsK6qo8ue1ZKPFS5SmMhsx4Z_4z9mF3Kpf1a2dYa5Nuj3qzfWQjWyKmh7qCuqLjDuGA-BOivJNsad8ok7xY2hqbI34cF4spepO5wXKlGBVIHh1JXGr0el6EfzjrJAZo3hiL8CoK2QAaRRNvgfe0OuGyTq8gO1ohSzkr_9tP_GZnkBOQK_EyYAtCL_c1A?encodeFailures=1&width=627&height=887'); //tag
         const texture7 = new THREE.TextureLoader().load('https://by3302files.storage.live.com/y4mEhB17xuDvdzGmcbwmGcnaST6Q5aIzO9l9WISXoJvE6teOaZOsK6qo8ue1ZKPFS5SmMhsx4Z_4z9mF3Kpf1a2dYa5Nuj3qzfWQjWyKmh7qCuqLjDuGA-BOivJNsad8ok7xY2hqbI34cF4spepO5wXKlGBVIHh1JXGr0el6EfzjrJAZo3hiL8CoK2QAaRRNvgfe0OuGyTq8gO1ohSzkr_9tP_GZnkBOQK_EyYAtCL_c1A?encodeFailures=1&width=627&height=887'); //tag
         const texture8 = new THREE.TextureLoader().load('https://by3302files.storage.live.com/y4mEhB17xuDvdzGmcbwmGcnaST6Q5aIzO9l9WISXoJvE6teOaZOsK6qo8ue1ZKPFS5SmMhsx4Z_4z9mF3Kpf1a2dYa5Nuj3qzfWQjWyKmh7qCuqLjDuGA-BOivJNsad8ok7xY2hqbI34cF4spepO5wXKlGBVIHh1JXGr0el6EfzjrJAZo3hiL8CoK2QAaRRNvgfe0OuGyTq8gO1ohSzkr_9tP_GZnkBOQK_EyYAtCL_c1A?encodeFailures=1&width=627&height=887'); //บนเชือก
-        const texture9 = new THREE.TextureLoader().load(Back); //หลัง
-        const texture10 = new THREE.TextureLoader().load(Back); //หลัง
-        const texture11 = new THREE.TextureLoader().load(Down); //พื้น
-        const texture12 = new THREE.TextureLoader().load(Up); //หน้า
+        const texture9 = new THREE.TextureLoader().load(profile.urltexback); //หลัง
+        const texture10 = new THREE.TextureLoader().load(profile.urltexback); //หลัง
+        const texture11 = new THREE.TextureLoader().load(profile.urltexdown); //พื้น
+        const texture12 = new THREE.TextureLoader().load(profile.urltexup); //หน้า
 
         const material1 = new THREE.MeshBasicMaterial({ map: texture1 });
         const material2 = new THREE.MeshBasicMaterial({ map: texture2 });
@@ -62,7 +66,7 @@ export default function App2(props) {
         const material12 = new THREE.MeshBasicMaterial({ map: texture12 });
 
         const { nodes, materials } = useGLTF('/RT1.glb')
-        console.log(time)
+
         return (
 
             <group ref={group} {...props} dispose={null}>
@@ -316,157 +320,37 @@ export default function App2(props) {
                     />
                 </group>
             </group>
+
         )
-
     }
-    const sendData = () => {
+    if (profile) {
+        return (
+            <>
+                <div>{"ชื่อรองเท้า: "} {profile.topic}</div>
+                <Canvas shadows dpr={[1, 2]} camera={{ position: [0, 2, 4], fov: 50 }}>
+                    <ambientLight intensity={0.7} />
+                    <spotLight intensity={0.5} angle={0.1} penumbra={1} position={[10, 15, 10]} castShadow />
+                    <Suspense fallback={null}>
+                        <Model />
+                        <Environment preset="city" />
+                        <ContactShadows rotation-x={Math.PI / 2} position={[0, -0.8, 0]} opacity={0.25} width={10} height={10} blur={1.5} far={0.8} />
+                    </Suspense>
+                    <OrbitControls />
 
-        if (!Topic) {
-            Swal.fire({
-                title: "Error",
-                text: "กรุณาตั้งชื่อรองเท้าของคุณ",
-                icon: "error",
-                showCancelButton: false,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-
-            })
-        } else {
-            try {
-                Swal.fire({
-                    title: "Are you sure?",
-                    text: "คุณต้องการบันทึก  " + Topic + "  ใช่หรือไม่ ? ",
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#3085d6",
-                    cancelButtonColor: "#d33",
-
-                }).then(async (result) => {
-                    if (result.isConfirmed) {
-                        await firebase
-                            .firestore()
-                            .collection('Model')
-                            .doc() // leave as .doc() for a random unique doc name to be assigned
-                            .set({
-                                uid: user.id,
-                                topic: Topic,
-                                Email: user.email,
-                                Type: "NIKE AIR FORCE1",
-                                Date: time,
-                                urltexfront: Front,
-                                urltexmidside: Midside,
-                                urltexside: Side,
-                                urltexup: Up,
-                                urltexdown: Down,
-                                urltexback: Back,
-
-                            }
-                            )
-                            .then(async () => {
-                                await Swal.fire({
-                                    title: "Save!",
-                                    text: "รองเท้า " + Topic + "  ถูกบันทึกแล้ว !",
-                                    icon: "success",
-                                    timer: 2000,
-                                    showConfirmButton: false
-                                });
-                                await router.push('/gallery')
-
-                            });
-
-                    }
-                })
-            } catch (error) {
-                console.log(error)
-                alert(error)
-            }
-
-        }
-    }
-    const CssTextField = styled(TextField)({
-        "& .MuiInputBase-input": {
-            borderRadius: 4,
-            position: "relative",
-            border: "1px solid #ced4da",
-            fontSize: 16,
-            width: "auto",
-            padding: "8px 10px",
-        },
-        "& label.Mui-focused": {
-            color: "#FFB830",
-        },
-        "& .MuiInput-underline:after": {
-            borderBottomColor: "#030B11",
-
-        },
-        "& .MuiOutlinedInput-root": {
-            "& fieldset": {
-                borderColor: "#030B11",
-
-            },
-            "&:hover fieldset": {
-                borderColor: "#F4FAFF",
-
-            },
-            "&.Mui-focused fieldset": {
-                borderColor: "#FFB830"
-            },
-            "&.MuiInputLabel-root": {
-                backgroundColor: "#030B11"
-            }
-        }
-    });
-
-
-    return (
-        <div>
-            <br />
-            <div className={style.loginbox4}>
-
-                <br />
-                <input className={style.input2} placeholder="Name" type="Text" id="Name" value={Topic}
-                    onChange={(e) => setTopic(e.target.value)} required="required" ></input>
-
-                <br />
-                <input className={style.input2} placeholder="Front" type="Text" id="Name" value={Front}
-                    onChange={(e) => setFront(e.target.value)} required="required" ></input>
-                <br />
-                <input className={style.input2} placeholder="Mid" type="Text" id="Name" value={Midside}
-                    onChange={(e) => setMidside(e.target.value)} required="required" ></input>
-                <br />
-                <input className={style.input2} placeholder="Side" type="Text" id="Name" value={Side}
-                    onChange={(e) => setSide(e.target.value)} required="required" ></input>
-                <br />
-                <input className={style.input2} placeholder="Back" type="Text" id="Name" value={Back}
-                    onChange={(e) => setBack(e.target.value)} required="required" ></input>
-                <br />
-                <input className={style.input2} placeholder="Top" type="Text" id="Name" value={Up}
-                    onChange={(e) => setUp(e.target.value)} required="required" ></input>
-                <br />
-                <input className={style.input2} placeholder="Buttom" type="Text" id="Name" value={Down}
-                    onChange={(e) => setDown(e.target.value)} required="required" ></input>
-                <br />
-
-                <button className={style.button2} onClick={sendData} style={{ width: '100%' }}>บันทึกข้อมูล</button>
-            </div>
-            <div className={style.container3}>
-                <div className={style.loginbox5}>
-
-                    <Canvas shadows dpr={[1, 2]} camera={{ position: [0, 2, 4], fov: 50 }}>
-                        <ambientLight intensity={0.7} />
-                        <spotLight intensity={0.5} angle={0.1} penumbra={1} position={[10, 15, 10]} castShadow />
-                        <Suspense fallback={null}>
-                            <Model />
-                            <Environment preset="city" />
-                            <ContactShadows rotation-x={Math.PI / 2} position={[0, -0.8, 0]} opacity={0.25} width={10} height={10} blur={1.5} far={0.8} />
-                        </Suspense>
-                        <OrbitControls />
-                    </Canvas>
-                    <div>
-                    </div>
+                </Canvas>
+                <div>
+                    {/* <input placeholder="Name" type="Text" id="Name" value={Name}
+                    onChange={(e) => setName(e.target.value)} required="required" ></input> */}
+                    {/* <img src={Name}></img> */}
+                    {/* <button onClick={sendData} style={{ width: '100%' }}>บันทึกข้อมูล</button> */}
                 </div>
-            </div>
-        </div>
+            </>
 
-    )
+        )
+    } else {
+        return (
+            <div>
+            </div>
+        )
+    }
 }

@@ -1,63 +1,25 @@
 
-import styles from '../styles/Home.module.css'
-import GetData from '../components/Getdata'; ''
-import Readdata from '../components/Readdata';
 import { useUser } from '../auth/useUser'
 import 'firebase/app'
-import MultiActionAreaCard from '../components/shoelist'
 import Gridshoe from '../components/shoegrid';
-import { useRouter } from 'next/router';
-import Link from 'next/link'
-import shoeinfo from './api/shoedata';
-import firebase from 'firebase/app'
 import 'firebase/storage'
-import { useState } from 'react';
-
+import Box from '@mui/material/Box';
+import SpeedDial from '@mui/material/SpeedDial';
+import SpeedDialIcon from '@mui/material/SpeedDialIcon';
+import SpeedDialAction from '@mui/material/SpeedDialAction';
+import FileCopyIcon from '@mui/icons-material/FileCopyOutlined';
+import SaveIcon from '@mui/icons-material/Save';
+import PrintIcon from '@mui/icons-material/Print';
+import ShareIcon from '@mui/icons-material/Share';
 
 export default function Index() {
   const { user, logout } = useUser()
-  const [image, setImage] = useState(null);
-  const [url, setUrl] = useState("");
-  const handleUpload = () => {
-    const uploadTask = firebase.storage().ref(`images/${image.name}`).put(image);
-    uploadTask.on(
-      "state_change",
-      snapshot => { },
-      error => {
-        console.log(error);
-      },
-      () => {
-        firebase
-          .storage()
-          .ref("images")
-          .child(image.name)
-          .getDownloadURL()
-          .then(url => {
-            console.log(url);
-            setUrl(url)
-          })
-      }
-    )
-  };
-
-  const handleChange = e => {
-    if (e.target.files[0]) {
-      setImage(e.target.files[0])
-    }
-  }
-  console.log("image: ", image)
-
-
 
   if (user) {
 
     return (
       <div >
         <Gridshoe />
-        <input type='file' onChange={handleChange} />
-        <button onClick={handleUpload}>Upload</button>
-        {url}
-        <img src={url} />
       </div>
 
     )

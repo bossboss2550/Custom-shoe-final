@@ -1,13 +1,13 @@
-.box {
+.box{
     text-align: center;
 }
 
-.link {
+.link{
     color: rgb(31, 45, 245);
     cursor: pointer;
 }
 
-.container {
+.container{
     display: flex;
     margin-top: 2rem;
     flex-direction: column;
@@ -31,7 +31,6 @@
     font-size: 20px;
     border-radius: 5px;
 }
-
 .loginbox2 {
     background: #FFB830;
     padding: 0px 100px 20px 100px;
@@ -66,8 +65,8 @@
     color: currentColor;
     background: transparent;
     border-radius: var(--size-radius);
-
-}
+      
+} 
 
 .button {
     outline: none;
@@ -83,8 +82,7 @@
     transition: all 0.3s ease;
 
 }
-
-.containerpro {
+.containerpro{
     display: flex;
     margin-top: 4rem;
     flex-direction: column;
@@ -93,8 +91,7 @@
     height: 100%;
     width: 100%;
 }
-
-.container2 {
+.container2{
     display: flex;
     margin-top: 4rem;
     flex-direction: column;
@@ -103,87 +100,16 @@
     height: 100%;
     width: 100%;
 }
-
 .loginbox3 {
-    background: #575757;
+    background: #FFB830;
     border: 3px solid currentColor;
     padding: 0px 0px 0px 0px;
     display: flex;
     flex-direction: column;
     align-items: center;
     position: relative;
-    width: 850px;
-    height: 500px;
+    width: 1200px;
+    height: 600px;
     font-size: 20px;
     border-radius: 5px;
-}
-
-.loginbox4 {
-    background: #575757;
-    border: 3px solid currentColor;
-    padding: 0px 0px 0px 0px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
-    width: 300px;
-    height: 500px;
-    font-size: 20px;
-    border-radius: 5px;
-    left: 1100px;
-    top: 47px;
-}
-
-.loginbox5 {
-    background: #575757;
-    border: 3px solid currentColor;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
-    width: 850px;
-    height: 500px;
-    font-size: 20px;
-    border-radius: 5px;
-    left: -250px;
-    top: 28px;
-}
-
-.container3 {
-    display: flex;
-    margin-top: -30rem;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-}
-
-.input2 {
-
-    font-size: 16px;
-    width: 200px;
-    height: 40px;
-    padding: 16px;
-    transition: all 0.3s ease;
-    box-sizing: border-box;
-    display: block;
-    border: 3px solid #000000;
-    color: currentColor;
-    background: white;
-    border-radius: var(--size-radius);
-
-}
-
-.button2 {
-    outline: #000000;
-    background: rgb(255, 255, 255);
-    color: #000;
-    padding: 16px;
-    width: 100%;
-    border: none;
-    text-transform: uppercase;
-    font-size: 16px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    cursor: pointer;
 }

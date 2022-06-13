@@ -44,9 +44,9 @@ export default function Custom(props) {
         const texture3 = new THREE.TextureLoader().load(profile.urltexmidside); //ข้างกลาง
         const texture4 = new THREE.TextureLoader().load(profile.urltexside); //ข้างริม
         const texture5 = new THREE.TextureLoader().load(profile.urltexside); //ข้างริม
-        const texture6 = new THREE.TextureLoader().load('https://by3302files.storage.live.com/y4mEhB17xuDvdzGmcbwmGcnaST6Q5aIzO9l9WISXoJvE6teOaZOsK6qo8ue1ZKPFS5SmMhsx4Z_4z9mF3Kpf1a2dYa5Nuj3qzfWQjWyKmh7qCuqLjDuGA-BOivJNsad8ok7xY2hqbI34cF4spepO5wXKlGBVIHh1JXGr0el6EfzjrJAZo3hiL8CoK2QAaRRNvgfe0OuGyTq8gO1ohSzkr_9tP_GZnkBOQK_EyYAtCL_c1A?encodeFailures=1&width=627&height=887'); //tag
-        const texture7 = new THREE.TextureLoader().load('https://by3302files.storage.live.com/y4mEhB17xuDvdzGmcbwmGcnaST6Q5aIzO9l9WISXoJvE6teOaZOsK6qo8ue1ZKPFS5SmMhsx4Z_4z9mF3Kpf1a2dYa5Nuj3qzfWQjWyKmh7qCuqLjDuGA-BOivJNsad8ok7xY2hqbI34cF4spepO5wXKlGBVIHh1JXGr0el6EfzjrJAZo3hiL8CoK2QAaRRNvgfe0OuGyTq8gO1ohSzkr_9tP_GZnkBOQK_EyYAtCL_c1A?encodeFailures=1&width=627&height=887'); //tag
-        const texture8 = new THREE.TextureLoader().load('https://by3302files.storage.live.com/y4mEhB17xuDvdzGmcbwmGcnaST6Q5aIzO9l9WISXoJvE6teOaZOsK6qo8ue1ZKPFS5SmMhsx4Z_4z9mF3Kpf1a2dYa5Nuj3qzfWQjWyKmh7qCuqLjDuGA-BOivJNsad8ok7xY2hqbI34cF4spepO5wXKlGBVIHh1JXGr0el6EfzjrJAZo3hiL8CoK2QAaRRNvgfe0OuGyTq8gO1ohSzkr_9tP_GZnkBOQK_EyYAtCL_c1A?encodeFailures=1&width=627&height=887'); //บนเชือก
+        const texture6 = new THREE.TextureLoader().load('https://th.bing.com/th/id/OIP.QsLz43H_JYtiDSoH3c2PZAAAAA?pid=ImgDet&rs=1'); //tag
+        const texture7 = new THREE.TextureLoader().load('https://th.bing.com/th/id/OIP.QsLz43H_JYtiDSoH3c2PZAAAAA?pid=ImgDet&rs=1'); //tag
+        const texture8 = new THREE.TextureLoader().load('https://th.bing.com/th/id/OIP.QsLz43H_JYtiDSoH3c2PZAAAAA?pid=ImgDet&rs=1'); //บนเชือก
         const texture9 = new THREE.TextureLoader().load(profile.urltexback); //หลัง
         const texture10 = new THREE.TextureLoader().load(profile.urltexback); //หลัง
         const texture11 = new THREE.TextureLoader().load(profile.urltexdown); //พื้น

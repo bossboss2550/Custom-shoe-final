@@ -187,3 +187,18 @@
     transition: all 0.3s ease;
     cursor: pointer;
 }
+
+.text {
+    color: white;
+    text-align: center;
+}
+
+.container4 {
+    display: flex;
+    margin-top: 1rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}

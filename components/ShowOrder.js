@@ -8,7 +8,9 @@ import { useRouter } from 'next/router'
 import 'firebase/storage'
 import { useUser } from '../auth/useUser'
 import { useEffect } from 'react'
-
+import style from "../pages/register.module.css";
+import { Button } from '@mui/material'
+import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined';
 
 export default function Custom(props) {
     const router = useRouter()
@@ -325,27 +327,32 @@ export default function Custom(props) {
     }
     if (profile) {
         return (
-            <>
-                <div>{"ชื่อรองเท้า: "} {profile.topic}</div>
-                <Canvas shadows dpr={[1, 2]} camera={{ position: [0, 2, 4], fov: 50 }}>
-                    <ambientLight intensity={0.7} />
-                    <spotLight intensity={0.5} angle={0.1} penumbra={1} position={[10, 15, 10]} castShadow />
-                    <Suspense fallback={null}>
-                        <Model />
-                        <Environment preset="city" />
-                        <ContactShadows rotation-x={Math.PI / 2} position={[0, -0.8, 0]} opacity={0.25} width={10} height={10} blur={1.5} far={0.8} />
-                    </Suspense>
-                    <OrbitControls />
+            <div>
 
-                </Canvas>
-                <div>
-                    {/* <input placeholder="Name" type="Text" id="Name" value={Name}
-                    onChange={(e) => setName(e.target.value)} required="required" ></input> */}
-                    {/* <img src={Name}></img> */}
-                    {/* <button onClick={sendData} style={{ width: '100%' }}>บันทึกข้อมูล</button> */}
+                <div className={style.container4}>
+                    <h2 className={style.text} >ชื่อรองเท้า:  {profile.topic}</h2>
+                    <div className={style.loginbox3}>
+
+                        <Canvas shadows dpr={[1, 2]} camera={{ position: [0, 2, 4], fov: 50 }}>
+                            <ambientLight intensity={0.7} />
+                            <spotLight intensity={0.5} angle={0.1} penumbra={1} position={[10, 15, 10]} castShadow />
+                            <Suspense fallback={null}>
+                                <Model />
+                                <Environment preset="city" />
+                                <ContactShadows rotation-x={Math.PI / 2} position={[0, -0.8, 0]} opacity={0.25} width={10} height={10} blur={1.5} far={0.8} />
+                            </Suspense>
+                            <OrbitControls />
+                        </Canvas>
+                        <div>
+                        </div>
+                    </div>
+                    <br />
+                    <Button variant="contained" href="https://www.facebook.com/Shop-Custom-106916272054944/" target="_blank">
+                        <FacebookOutlinedIcon />
+                        ติดต่อผู้ขาย
+                    </Button>
                 </div>
-            </>
-
+            </div>
         )
     } else {
         return (

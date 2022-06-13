@@ -8,11 +8,11 @@ import Showcus from '../components/ShowOrder';
 export default function Custom() {
 
     return (
-        <div className={style.container2}>
-            <div className={style.loginbox3}>
-                <Showcus />
-            </div>
+        <div >
+
+            <Showcus />
         </div>
+
     )
 
 }

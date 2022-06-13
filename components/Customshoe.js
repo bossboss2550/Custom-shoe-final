@@ -346,7 +346,7 @@ export default function App2(props) {
                         await firebase
                             .firestore()
                             .collection('Model')
-                            .doc() // leave as .doc() for a random unique doc name to be assigned
+                            .doc()
                             .set({
                                 uid: user.id,
                                 topic: Topic,

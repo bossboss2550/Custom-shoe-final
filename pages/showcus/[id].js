@@ -6,8 +6,8 @@ const UserId = () => {
     const router = useRouter()
     const { id } = router.query
     return <>
-        <div className={style.container2}>
-            <div className={style.loginbox3}>
+        <div >
+            <div>
                 <Custom id={id} />
             </div>
         </div>

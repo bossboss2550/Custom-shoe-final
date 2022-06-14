@@ -43,7 +43,8 @@ export default function Register() {
                                     cancelButtonColor: "#d33",
 
                                 })
-                            } else {
+                            }
+                            else {
                                 Swal.fire({
                                     title: "Are you sure?",
                                     text: "คุณต้องการสมัครด้วย  " + email + "  ใช่หรือไม่ ? ",

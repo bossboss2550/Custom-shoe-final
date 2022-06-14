@@ -22,7 +22,17 @@ const Getdata = () => {
                 confirmButtonColor: "#3085d6",
                 cancelButtonColor: "#d33",
             })
-        } else {
+        } else if (Name == "Admin") {
+            Swal.fire({
+                title: "Error",
+                text: "กรุณาเปลี่ยนชื่อ",
+                icon: "error",
+                showCancelButton: false,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+            })
+        }
+        else {
             try {
                 firebase
                     .firestore()
@@ -31,6 +41,8 @@ const Getdata = () => {
                     .set({
                         Name: Name,
                         Age: Age,
+                        Email: user.email,
+                        uid: user.id
                     }
                     )
                     .then(async () => {

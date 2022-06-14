@@ -70,7 +70,7 @@ export default function Register() {
                                     .catch(function (error) {
                                         Swal.fire({
                                             title: "Error",
-                                            text: "บัญชีนี้ถูกใช้ไปแล้ว",
+                                            text: "เกิดข้อผิดพลาดกรุณาใช้บัญชีอื่น",
                                             icon: "error",
                                             showCancelButton: false,
                                             confirmButtonColor: "#3085d6",

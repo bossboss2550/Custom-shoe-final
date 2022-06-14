@@ -15,7 +15,7 @@ export default function Profile() {
   const { user, logout } = useUser()
 
   if (user) {
-    if (user.email == "bossadmin1@mail.com") {
+    if (user.email == "admin@admin.com") {
       return (
         < div >
 

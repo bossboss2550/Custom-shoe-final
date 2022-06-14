@@ -417,6 +417,15 @@ export default function App2(props) {
         }
     });
 
+    const ResetData = () => {
+        setFront("")
+        setMidside("")
+        setSide("")
+        setBack("")
+        setUp("")
+        setDown("")
+    }
+
 
     return (
         <div>
@@ -425,29 +434,30 @@ export default function App2(props) {
 
                 <br />
                 <input className={style.input2} placeholder="Name" type="Text" id="Name" value={Topic}
-                    onChange={(e) => setTopic(e.target.value)} required="required" ></input>
+                    onChange={(e) => setTopic(e.target.value)} ></input>
 
                 <br />
-                <input className={style.input2} placeholder="Front" type="Text" id="Name" value={Front}
-                    onChange={(e) => setFront(e.target.value)} required="required" ></input>
+                <input className={style.input2} placeholder="Front LinkPic Url " type="Text" id="Name" value={Front}
+                    onChange={(e) => setFront(e.target.value)} ></input>
                 <br />
-                <input className={style.input2} placeholder="Mid" type="Text" id="Name" value={Midside}
-                    onChange={(e) => setMidside(e.target.value)} required="required" ></input>
+                <input className={style.input2} placeholder="Mid LinkPic Url" type="Text" id="Name" value={Midside}
+                    onChange={(e) => setMidside(e.target.value)}  ></input>
                 <br />
-                <input className={style.input2} placeholder="Side" type="Text" id="Name" value={Side}
-                    onChange={(e) => setSide(e.target.value)} required="required" ></input>
+                <input className={style.input2} placeholder="Side LinkPic Url" type="Text" id="Name" value={Side}
+                    onChange={(e) => setSide(e.target.value)}  ></input>
                 <br />
-                <input className={style.input2} placeholder="Back" type="Text" id="Name" value={Back}
-                    onChange={(e) => setBack(e.target.value)} required="required" ></input>
+                <input className={style.input2} placeholder="Back LinkPic Url" type="Text" id="Name" value={Back}
+                    onChange={(e) => setBack(e.target.value)}  ></input>
                 <br />
-                <input className={style.input2} placeholder="Top" type="Text" id="Name" value={Up}
-                    onChange={(e) => setUp(e.target.value)} required="required" ></input>
+                <input className={style.input2} placeholder="Top LinkPic Url" type="Text" id="Name" value={Up}
+                    onChange={(e) => setUp(e.target.value)} ></input>
                 <br />
-                <input className={style.input2} placeholder="Buttom" type="Text" id="Name" value={Down}
-                    onChange={(e) => setDown(e.target.value)} required="required" ></input>
+                <input className={style.input2} placeholder="Buttom LinkPic Url" type="Text" id="Name" value={Down}
+                    onChange={(e) => setDown(e.target.value)} ></input>
                 <br />
-
+                <button className={style.button3} onClick={ResetData} style={{ width: '100%' }}>ล้างข้อมูล</button>
                 <button className={style.button2} onClick={sendData} style={{ width: '100%' }}>บันทึกข้อมูล</button>
+
             </div>
             <div className={style.container3}>
                 <div className={style.loginbox5}>

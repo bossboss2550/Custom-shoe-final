@@ -43,7 +43,7 @@ const FirebaseAuth = () => {
         signInSuccessUrl={signInSuccessUrl}
       />
       <div className={style.box}>
-        <h5>ยังไม่มีบัญชี ? <a onClick={clickRegis} className={style.link}>สมัครเลย !!</a></h5>
+        <h5 className={style.text}>ยังไม่มีบัญชี ? <a onClick={clickRegis} className={style.link}>สมัครเลย !!</a></h5>
       </div>
     </div>
   );

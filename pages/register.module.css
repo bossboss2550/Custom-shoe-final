@@ -7,6 +7,11 @@
     cursor: pointer;
 }
 
+.text {
+    color: rgb(254, 255, 255);
+    cursor: pointer;
+}
+
 .container {
     display: flex;
     margin-top: 2rem;

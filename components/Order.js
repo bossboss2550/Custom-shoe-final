@@ -11,12 +11,56 @@ import { useEffect } from 'react'
 import style from "../pages/register.module.css";
 import { Button } from '@mui/material'
 import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined';
+import Swal from "sweetalert2";
 
-export default function Custom(props) {
+export default function Buy(props) {
     const router = useRouter()
     const { user } = useUser()
     const { id } = props
     const [profile, setProfile] = useState(null)
+    const [Name, setName] = useState("");
+    const [Surname, setSurname] = useState("");
+    const [PhoneNum, setPhoneNum] = useState("");
+    const [Address, setAddress] = useState("");
+    const [image, setImage] = useState(null);
+    const [url, setUrl] = useState("");
+    const handleUpload = () => {
+        const uploadTask = firebase.storage().ref(`Bills/${image.name}`).put(image);
+        uploadTask.on(
+            "state_change",
+            snapshot => { },
+            error => {
+                console.log(error);
+            },
+            () => {
+                firebase
+                    .storage()
+                    .ref("Bills")
+                    .child(image.name)
+                    .getDownloadURL()
+                    .then(url => {
+                        console.log(url);
+                        setUrl(url)
+                        const reader = new FileReader()
+                        reader.onload = (e) => {
+                            Swal.fire({
+                                title: 'Your uploaded picture',
+                                imageUrl: url,
+
+                            })
+                        }
+                        reader.readAsDataURL(image)
+
+                    })
+            }
+        )
+    };
+
+    const handleChange = e => {
+        if (e.target.files[0]) {
+            setImage(e.target.files[0])
+        }
+    }
 
     useEffect(() => {
         if (!user || !user.email) return;
@@ -32,12 +76,12 @@ export default function Custom(props) {
 
 
     }, [user])
-
     const handleExpandClick = () => {
         setExpanded(!expanded);
 
     };
-    const [Name, setName] = useState("");
+
+
     function Model({ ...props }) {
 
 
@@ -326,17 +370,100 @@ export default function Custom(props) {
 
         )
     }
-    if (profile) {
-        if (user.email != profile.Email && user.email != "admin@admin.com") {
-            router.push("/")
+    const sendData = () => {
+
+        if (!Name || !Surname || !Address || !PhoneNum || !url) {
+            Swal.fire({
+                title: "Error",
+                text: "กรุณากรอกข้อมูลให้ครบถ้วน",
+                icon: "error",
+                showCancelButton: false,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+
+            })
+        } else {
+            try {
+                Swal.fire({
+                    title: "Are you sure?",
+                    text: "คุณต้องการบันทึกข้อมูลใช่หรือไม่ ? ",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+
+                }).then(async (result) => {
+                    if (result.isConfirmed) {
+                        await firebase
+                            .firestore()
+                            .collection('Order')
+                            .doc(id)
+                            .set({
+                                uid: user.id,
+                                NameShoe: profile.topic,
+                                Email: user.email,
+                                Type: "NIKE AIR FORCE1",
+                                Name: Name + "  " + Surname,
+                                Phonenumber: PhoneNum,
+                                Address: Address,
+                                Billurl: url,
+                                Status: "1",
+                                Tracking: null
+                            }
+                            )
+                            .then(async () => {
+                                await Swal.fire({
+                                    title: "Save!",
+                                    text: "คำสั่งซื้อถูกบันทึกแล้ว !",
+                                    icon: "success",
+                                    timer: 2000,
+                                    showConfirmButton: false
+                                });
+                                await router.push('/gallery')
+
+                            });
+
+                    }
+                })
+            } catch (error) {
+                console.log(error)
+                alert(error)
+            }
+
         }
+    }
+    if (profile) {
         return (
             <div>
+                <br />
+                <h2 className={style.text} >รายละเอียดการสั่งซื้อ</h2>
+                <div className={style.loginbox6}>
+                    <br />
+                    <br /><div> &nbsp; &nbsp; &nbsp; &nbsp;
+                        <input className={style.input13} placeholder="ชื่อ" type="Text" id="Name" value={Name}
+                            onChange={(e) => setName(e.target.value)} ></input> &nbsp; &nbsp;
+                        <input className={style.input13} placeholder="นามสกุล " type="Text" id="Name" value={Surname}
+                            onChange={(e) => setSurname(e.target.value)} ></input> </div> <br />
+                    <div>&nbsp; &nbsp; &nbsp; &nbsp;<textarea rows="4" cols="50" className={style.input123} placeholder="ที่อยู่" type="Text" id="Name" value={Address}
+                        onChange={(e) => setAddress(e.target.value)}  ></textarea></div>
 
-                <div className={style.container4}>
-                    <h2 className={style.text} >ชื่อรองเท้า:  {profile.topic}</h2>
-                    <div className={style.loginbox3}>
+                    <br /><div> &nbsp; &nbsp; &nbsp; &nbsp;
+                        <input className={style.input222} placeholder="เบอร์โทร" type="Text" id="Name" value={PhoneNum}
+                            onChange={(e) => setPhoneNum(e.target.value)}  ></input>
+                        <br />
+                    </div><br />
+                    <div>&nbsp; &nbsp; &nbsp; &nbsp;
+                        <input className={style.input111} type='file' onChange={handleChange} />
+                        <button className={style.button245} onClick={handleUpload}>Upload</button>
+                    </div>
+                    <br />
+                    <button className={style.button2} onClick={sendData} style={{ width: '100%' }}>บันทึกข้อมูล</button>
 
+                </div>
+
+                <div className={style.container3}>
+                    <div className={style.loginbox5}>
+                        <h2 className={style.text} >ชื่อรองเท้า:  {profile.topic}</h2>
                         <Canvas shadows dpr={[1, 2]} camera={{ position: [0, 2, 4], fov: 50 }}>
                             <ambientLight intensity={0.7} />
                             <spotLight intensity={0.5} angle={0.1} penumbra={1} position={[10, 15, 10]} castShadow />
@@ -349,12 +476,13 @@ export default function Custom(props) {
                         </Canvas>
                         <div>
                         </div>
+                        <Button variant="contained" href="https://www.messenger.com/t/106916272054944/" target="_blank">
+                            <FacebookOutlinedIcon />
+                            ติดต่อผู้ขาย
+                        </Button>
+
                     </div>
                     <br />
-                    <Button variant="contained" href="https://www.facebook.com/Shop-Custom-106916272054944/" target="_blank">
-                        <FacebookOutlinedIcon />
-                        ติดต่อผู้ขาย
-                    </Button>
                 </div>
             </div>
         )

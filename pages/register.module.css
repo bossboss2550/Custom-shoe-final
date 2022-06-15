@@ -150,7 +150,7 @@
     height: 500px;
     font-size: 20px;
     border-radius: 5px;
-    left: -250px;
+    left: -300px;
     top: 28px;
 }
 
@@ -220,4 +220,84 @@
     align-items: center;
     height: 100%;
     width: 100%;
+}
+
+.loginbox6 {
+    background: #575757;
+    border: 3px solid currentColor;
+    padding: 0px 0px 0px 0px;
+    display: flex;
+    flex-direction: column;
+
+    position: relative;
+    width: 500px;
+    height: 500px;
+    font-size: 20px;
+    border-radius: 5px;
+    left: 950px;
+    top: 48px;
+}
+
+.input13 {
+
+    font-size: 16px;
+    width: 200px;
+    height: 40px;
+    padding: 16px;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+    border: 3px solid #000000;
+    color: currentColor;
+    background: white;
+    border-radius: var(--size-radius);
+
+}
+
+.input123 {
+
+    font-size: 16px;
+    width: 424px;
+    height: 150px;
+    padding: 16px;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+    border: 3px solid #000000;
+    color: currentColor;
+    background: white;
+    border-radius: var(--size-radius);
+
+}
+
+.input222 {
+
+    font-size: 16px;
+    width: 424px;
+    height: 40px;
+    padding: 16px;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+    border: 3px solid #000000;
+    color: currentColor;
+    background: white;
+    border-radius: var(--size-radius);
+
+}
+
+.input111 {
+
+    font-size: 16px;
+    width: 250px;
+    height: 60px;
+
+}
+
+.button245 {
+    outline: #ffffff;
+    background: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    width: 90px;
+    height: 25px;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
 }

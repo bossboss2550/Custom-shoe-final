@@ -21,8 +21,6 @@ export default function Gridshoe() {
         firebase
             .firestore()
             .collection("Model")
-            // .orderBy("Date", "desc")
-            // .where("Email", "==", user.email)
             .get()
             .then(querySnapshot => {
                 const Data = []

@@ -383,39 +383,7 @@ export default function App2(props) {
 
         }
     }
-    const CssTextField = styled(TextField)({
-        "& .MuiInputBase-input": {
-            borderRadius: 4,
-            position: "relative",
-            border: "1px solid #ced4da",
-            fontSize: 16,
-            width: "auto",
-            padding: "8px 10px",
-        },
-        "& label.Mui-focused": {
-            color: "#FFB830",
-        },
-        "& .MuiInput-underline:after": {
-            borderBottomColor: "#030B11",
 
-        },
-        "& .MuiOutlinedInput-root": {
-            "& fieldset": {
-                borderColor: "#030B11",
-
-            },
-            "&:hover fieldset": {
-                borderColor: "#F4FAFF",
-
-            },
-            "&.Mui-focused fieldset": {
-                borderColor: "#FFB830"
-            },
-            "&.MuiInputLabel-root": {
-                backgroundColor: "#030B11"
-            }
-        }
-    });
 
     const ResetData = () => {
         setFront("")
@@ -431,7 +399,6 @@ export default function App2(props) {
         <div>
             <br />
             <div className={style.loginbox4}>
-
                 <br />
                 <input className={style.input2} placeholder="Name" type="Text" id="Name" value={Topic}
                     onChange={(e) => setTopic(e.target.value)} ></input>

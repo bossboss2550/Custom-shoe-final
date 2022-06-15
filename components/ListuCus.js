@@ -8,6 +8,7 @@ import { useRouter } from 'next/router';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Swal from "sweetalert2";
 import firebase from 'firebase';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 export default function MultiActionAreaCard(props) {
     const { shoegrid } = props;
@@ -15,6 +16,14 @@ export default function MultiActionAreaCard(props) {
     function swapPage(id) {
         router.push({
             pathname: '/showcus/[id]',
+            query: {
+                id: id,
+            }
+        })
+    }
+    function swapBuy(id) {
+        router.push({
+            pathname: '/buyorder/[id]',
             query: {
                 id: id,
             }
@@ -73,15 +82,19 @@ export default function MultiActionAreaCard(props) {
                         {shoegrid.topic}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
-                        {shoegrid.Type}
+                        {shoegrid.Type} <br /><br />
+                        {shoegrid.Email}
                     </Typography>
                 </CardContent>
             </CardActionArea>
 
             <CardActions>
-                {shoegrid.Email} &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                <Button size="small" color="primary" theme={theme} onClick={() => { swapBuy(shoegrid.key) }}>
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <ShoppingCartIcon /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+                </Button>
                 <Button size="small" color="error" theme={theme} onClick={() => { deleteImage(shoegrid.key) }}>
-                    <DeleteIcon color="pink" />
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<DeleteIcon />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
                 </Button>
             </CardActions>
 

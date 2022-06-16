@@ -403,7 +403,7 @@ export default function UpdateOrder(props) {
     console.log(profile)
     if (profile) {
         if (user.email != "admin@admin.com") {
-            // router.push("/")
+            router.push("/")
         }
         return (
             <div>

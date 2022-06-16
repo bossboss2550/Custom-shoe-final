@@ -16,6 +16,7 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
+import { stat } from 'fs'
 
 export default function UpdateOrder(props) {
     const router = useRouter()
@@ -24,6 +25,8 @@ export default function UpdateOrder(props) {
     const [profile, setProfile] = useState(null)
     const [track, setTrack] = useState("");
     const [status, setStatus] = React.useState("");
+    const [buystatus, setBuystatus] = useState("");
+
     var today = new Date()
     var minutes = today.getMinutes();
     minutes = minutes > 9 ? minutes : '0' + minutes;
@@ -33,8 +36,13 @@ export default function UpdateOrder(props) {
     var time = today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear() + '  ' + today.getHours() + ':' + minutes + ':' + sec;
     const handleChange = (event) => {
         setStatus(event.target.value);
+        if (status == 0) {
+            setBuystatus(false)
+        }
+        else {
+            setBuystatus(true)
+        }
     };
-
     useEffect(() => {
         if (!user || !user.email) return;
         async function ft() {
@@ -47,7 +55,6 @@ export default function UpdateOrder(props) {
         ft()
 
 
-
     }, [user])
     const ShowImg = () => {
         Swal.fire({
@@ -56,7 +63,6 @@ export default function UpdateOrder(props) {
         })
 
     };
-
     function Model({ ...props }) {
 
 
@@ -375,8 +381,8 @@ export default function UpdateOrder(props) {
                             .doc(id)
                             .update({
                                 Status: status,
-                                Tracking: track
-
+                                Tracking: track,
+                                BuyStatus: buystatus
                             }
                             )
                             .then(async () => {
@@ -387,7 +393,7 @@ export default function UpdateOrder(props) {
                                     timer: 2000,
                                     showConfirmButton: false
                                 });
-                                await router.push('/gallery')
+                                await router.push('/CheckOrder')
 
                             });
 

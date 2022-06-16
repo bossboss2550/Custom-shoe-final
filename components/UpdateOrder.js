@@ -407,14 +407,15 @@ export default function UpdateOrder(props) {
         }
         return (
             <div>
-                <br />
-                <h2 className={style.text} >รายละเอียดการสั่งซื้อ</h2>
-                <div className={style.loginbox65}>
 
-                    <br /><div> &nbsp; &nbsp; &nbsp; &nbsp;
-                        ชื่อ : {profile.Name} &nbsp; &nbsp;
-                    </div> <br />&nbsp; &nbsp; &nbsp; &nbsp; ที่อยู่ : {profile.Address}<br />
-                    <div>&nbsp; &nbsp; &nbsp; &nbsp;</div>
+                <h2 className={style.text} >รายละเอียดการสั่งซื้อ</h2>
+                <div className={style.loginbox65}><br />
+                    <div>
+                        &nbsp; &nbsp; &nbsp; &nbsp; ชื่อ : {profile.Name} <br /><br />
+                        &nbsp; &nbsp; &nbsp; &nbsp; ที่อยู่ :
+                    </div>
+                    <div>&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;<textarea rows="4" cols="50" className={style.input1234} placeholder="ที่อยู่" type="Text" id="Name" value={profile.Address}
+                    ></textarea></div><br />
                     <div> &nbsp; &nbsp; &nbsp; &nbsp; Email : {profile.Email}
                     </div>
                     <br /><div> &nbsp; &nbsp; &nbsp; &nbsp; เบอร์โทรศัพท์ : {profile.Phonenumber}
@@ -436,6 +437,7 @@ export default function UpdateOrder(props) {
                                     <MenuItem value={3}>เตรียมจัดส่งสินค้า</MenuItem>
                                     <MenuItem value={4}>จัดส่งสินค้าเรียบร้อย</MenuItem>
                                     <MenuItem value={5}>เกิดข้อผิดพลาด</MenuItem>
+                                    <MenuItem value={0}>ยกเลิกออเดอร์</MenuItem>
                                 </Select>
                             </FormControl>
                         </Box><br />
@@ -444,14 +446,15 @@ export default function UpdateOrder(props) {
                                 onChange={(e) => setTrack(e.target.value)}  ></input>
 
                         </div><br />
-                        <div>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
+                        <div>  &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
                             <Button variant="contained" onClick={ShowImg} >
                                 ดูสลิปโอนเงิน
+                            </Button>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
+                            <Button color='success' variant="contained" onClick={sendData} >
+                                บันทึกข้อมูล
                             </Button>
                         </div>
                     </div>
-                    <br /><div>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
-                        <button className={style.button33} onClick={sendData}> บันทึกข้อมูล</button></div>
 
                 </div>
 

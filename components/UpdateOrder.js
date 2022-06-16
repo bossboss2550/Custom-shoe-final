@@ -34,15 +34,18 @@ export default function UpdateOrder(props) {
     sec = sec > 9 ? sec : '0' + sec;
 
     var time = today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear() + '  ' + today.getHours() + ':' + minutes + ':' + sec;
-    const handleChange = (event) => {
-        setStatus(event.target.value);
-        if (status == 0) {
+
+    const handleAddTypeChange = (e) => {
+        if (e.target.value === 0) {
+            setStatus(e.target.value)
             setBuystatus(false)
-        }
-        else {
+        } else {
+            setStatus(e.target.value)
             setBuystatus(true)
         }
-    };
+
+    }
+
     useEffect(() => {
         if (!user || !user.email) return;
         async function ft() {
@@ -406,12 +409,17 @@ export default function UpdateOrder(props) {
 
         }
     }
-    console.log(profile)
+
+
+    console.log(buystatus)
     if (profile) {
         if (user.email != "admin@admin.com") {
             router.push("/")
         }
+
+
         return (
+
             <div>
 
                 <h2 className={style.text} >รายละเอียดการสั่งซื้อ</h2>
@@ -436,7 +444,7 @@ export default function UpdateOrder(props) {
                                     id="demo-simple-select"
                                     value={status}
                                     label="สถานะการสั่งซื้อ"
-                                    onChange={handleChange}
+                                    onChange={handleAddTypeChange}
                                 >
                                     <MenuItem value={1}>ตรวจสอบยอดโอน</MenuItem>
                                     <MenuItem value={2}>จัดทำสินค้า</MenuItem>

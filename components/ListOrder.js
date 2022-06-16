@@ -11,12 +11,12 @@ import firebase from 'firebase';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 
-export default function MultiActionAreaCard(props) {
+export default function MultiActionAreaCard2(props) {
     const { shoegrid } = props;
     const router = useRouter();
     function swapPage(id) {
         router.push({
-            pathname: '/showcus/[id]',
+            pathname: '/updateorder/[id]',
             query: {
                 id: id,
             }

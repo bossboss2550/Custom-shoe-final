@@ -7,15 +7,23 @@ import firebase from 'firebase/app'
 import { useRouter } from 'next/router'
 import 'firebase/storage'
 import { useUser } from '../auth/useUser'
+import { useEffect } from 'react'
 import style from "../pages/register.module.css";
-import TextField, { TextFieldProps } from "@mui/material/TextField";
-import { alpha, styled } from "@mui/material/styles";
+import { Button, TextField } from '@mui/material'
 import Swal from "sweetalert2";
+import Box from "@mui/material/Box";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
 
-export default function App2(props) {
-
+export default function UpdateOrder(props) {
     const router = useRouter()
     const { user } = useUser()
+    const { id } = props
+    const [profile, setProfile] = useState(null)
+    const [track, setTrack] = useState("");
+    const [status, setStatus] = React.useState("");
     var today = new Date()
     var minutes = today.getMinutes();
     minutes = minutes > 9 ? minutes : '0' + minutes;
@@ -23,30 +31,48 @@ export default function App2(props) {
     sec = sec > 9 ? sec : '0' + sec;
 
     var time = today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear() + '  ' + today.getHours() + ':' + minutes + ':' + sec;
+    const handleChange = (event) => {
+        setStatus(event.target.value);
+    };
 
-    const [Front, setFront] = useState(props.Front);
-    const [Midside, setMidside] = useState(props.Midside);
-    const [Side, setSide] = useState(props.Side);
-    const [Up, setUp] = useState(props.Up);
-    const [Back, setBack] = useState(props.Back);
-    const [Down, setDown] = useState(props.Down);
-    const [Topic, setTopic] = useState(props.Topic);
+    useEffect(() => {
+        if (!user || !user.email) return;
+        async function ft() {
+            const docRefImage = firebase.firestore().collection("Model").doc(id);
+            var tagImage = await docRefImage.get().then(async (doc) => {
+                setProfile(doc.data())
+            })
+        }
+
+        ft()
+
+
+
+    }, [user])
+    const ShowImg = () => {
+        Swal.fire({
+            imageUrl: profile.Billurl,
+            imageAlt: 'A tall image'
+        })
+
+    };
+
     function Model({ ...props }) {
 
 
         const group = useRef()
-        const texture1 = new THREE.TextureLoader().load(Front); //หน้าล่าง
-        const texture2 = new THREE.TextureLoader().load(Midside); //ข้างกลาง
-        const texture3 = new THREE.TextureLoader().load(Midside); //ข้างกลาง
-        const texture4 = new THREE.TextureLoader().load(Side); //ข้างริม
-        const texture5 = new THREE.TextureLoader().load(Side); //ข้างริม
+        const texture1 = new THREE.TextureLoader().load(profile.urltexfront); //หน้าล่าง
+        const texture2 = new THREE.TextureLoader().load(profile.urltexmidside); //ข้างกลาง
+        const texture3 = new THREE.TextureLoader().load(profile.urltexmidside); //ข้างกลาง
+        const texture4 = new THREE.TextureLoader().load(profile.urltexside); //ข้างริม
+        const texture5 = new THREE.TextureLoader().load(profile.urltexside); //ข้างริม
         const texture6 = new THREE.TextureLoader().load('https://th.bing.com/th/id/OIP.QsLz43H_JYtiDSoH3c2PZAAAAA?pid=ImgDet&rs=1'); //tag
         const texture7 = new THREE.TextureLoader().load('https://th.bing.com/th/id/OIP.QsLz43H_JYtiDSoH3c2PZAAAAA?pid=ImgDet&rs=1'); //tag
         const texture8 = new THREE.TextureLoader().load('https://th.bing.com/th/id/OIP.QsLz43H_JYtiDSoH3c2PZAAAAA?pid=ImgDet&rs=1'); //บนเชือก
-        const texture9 = new THREE.TextureLoader().load(Back); //หลัง
-        const texture10 = new THREE.TextureLoader().load(Back); //หลัง
-        const texture11 = new THREE.TextureLoader().load(Down); //พื้น
-        const texture12 = new THREE.TextureLoader().load(Up); //หน้า
+        const texture9 = new THREE.TextureLoader().load(profile.urltexback); //หลัง
+        const texture10 = new THREE.TextureLoader().load(profile.urltexback); //หลัง
+        const texture11 = new THREE.TextureLoader().load(profile.urltexdown); //พื้น
+        const texture12 = new THREE.TextureLoader().load(profile.urltexup); //หน้า
 
         const material1 = new THREE.MeshBasicMaterial({ map: texture1 });
         const material2 = new THREE.MeshBasicMaterial({ map: texture2 });
@@ -62,7 +88,7 @@ export default function App2(props) {
         const material12 = new THREE.MeshBasicMaterial({ map: texture12 });
 
         const { nodes, materials } = useGLTF('/RT1.glb')
-        console.log(time)
+
         return (
 
             <group ref={group} {...props} dispose={null}>
@@ -316,15 +342,15 @@ export default function App2(props) {
                     />
                 </group>
             </group>
-        )
 
+        )
     }
     const sendData = () => {
 
-        if (!Topic) {
+        if (status == "4" && !track) {
             Swal.fire({
                 title: "Error",
-                text: "กรุณาตั้งชื่อรองเท้าของคุณ",
+                text: "กรุณากรอกเลข Tracking",
                 icon: "error",
                 showCancelButton: false,
                 confirmButtonColor: "#3085d6",
@@ -335,7 +361,7 @@ export default function App2(props) {
             try {
                 Swal.fire({
                     title: "Are you sure?",
-                    text: "คุณต้องการบันทึก  " + Topic + "  ใช่หรือไม่ ? ",
+                    text: "คุณต้องการบันทึกข้อมูลใช่หรือไม่ ? ",
                     icon: "warning",
                     showCancelButton: true,
                     confirmButtonColor: "#3085d6",
@@ -346,27 +372,17 @@ export default function App2(props) {
                         await firebase
                             .firestore()
                             .collection('Model')
-                            .doc()
-                            .set({
-                                uid: user.id,
-                                topic: Topic,
-                                Email: user.email,
-                                Type: "NIKE AIR FORCE1",
-                                Date: time,
-                                urltexfront: Front,
-                                urltexmidside: Midside,
-                                urltexside: Side,
-                                urltexup: Up,
-                                urltexdown: Down,
-                                urltexback: Back,
-                                Status: 0
+                            .doc(id)
+                            .update({
+                                Status: status,
+                                Tracking: track
 
                             }
                             )
                             .then(async () => {
                                 await Swal.fire({
                                     title: "Save!",
-                                    text: "รองเท้า " + Topic + "  ถูกบันทึกแล้ว !",
+                                    text: "คำสั่งซื้อถูกบันทึกแล้ว !",
                                     icon: "success",
                                     timer: 2000,
                                     showConfirmButton: false
@@ -384,67 +400,86 @@ export default function App2(props) {
 
         }
     }
+    console.log(profile)
+    if (profile) {
+        if (user.email != "admin@admin.com") {
+            // router.push("/")
+        }
+        return (
+            <div>
+                <br />
+                <h2 className={style.text} >รายละเอียดการสั่งซื้อ</h2>
+                <div className={style.loginbox65}>
 
-
-    const ResetData = () => {
-        setFront("")
-        setMidside("")
-        setSide("")
-        setBack("")
-        setUp("")
-        setDown("")
-    }
-
-
-    return (
-        <div>
-            <br />
-            <div className={style.loginbox4}>
-                <br />
-                <input className={style.input2} placeholder="Name" type="Text" id="Name" value={Topic}
-                    onChange={(e) => setTopic(e.target.value)} ></input>
-
-                <br />
-                <input className={style.input2} placeholder="Front LinkPic Url " type="Text" id="Name" value={Front}
-                    onChange={(e) => setFront(e.target.value)} ></input>
-                <br />
-                <input className={style.input2} placeholder="Mid LinkPic Url" type="Text" id="Name" value={Midside}
-                    onChange={(e) => setMidside(e.target.value)}  ></input>
-                <br />
-                <input className={style.input2} placeholder="Side LinkPic Url" type="Text" id="Name" value={Side}
-                    onChange={(e) => setSide(e.target.value)}  ></input>
-                <br />
-                <input className={style.input2} placeholder="Back LinkPic Url" type="Text" id="Name" value={Back}
-                    onChange={(e) => setBack(e.target.value)}  ></input>
-                <br />
-                <input className={style.input2} placeholder="Top LinkPic Url" type="Text" id="Name" value={Up}
-                    onChange={(e) => setUp(e.target.value)} ></input>
-                <br />
-                <input className={style.input2} placeholder="Buttom LinkPic Url" type="Text" id="Name" value={Down}
-                    onChange={(e) => setDown(e.target.value)} ></input>
-                <br />
-                <button className={style.button3} onClick={ResetData} style={{ width: '100%' }}>ล้างข้อมูล</button>
-                <button className={style.button2} onClick={sendData} style={{ width: '100%' }}>บันทึกข้อมูล</button>
-
-            </div>
-            <div className={style.container3}>
-                <div className={style.loginbox5}>
-
-                    <Canvas shadows dpr={[1, 2]} camera={{ position: [0, 2, 4], fov: 50 }}>
-                        <ambientLight intensity={0.7} />
-                        <spotLight intensity={0.5} angle={0.1} penumbra={1} position={[10, 15, 10]} castShadow />
-                        <Suspense fallback={null}>
-                            <Model />
-                            <Environment preset="city" />
-                            <ContactShadows rotation-x={Math.PI / 2} position={[0, -0.8, 0]} opacity={0.25} width={10} height={10} blur={1.5} far={0.8} />
-                        </Suspense>
-                        <OrbitControls />
-                    </Canvas>
-                    <div>
+                    <br /><div> &nbsp; &nbsp; &nbsp; &nbsp;
+                        ชื่อ : {profile.Name} &nbsp; &nbsp;
+                    </div> <br />&nbsp; &nbsp; &nbsp; &nbsp; ที่อยู่ : {profile.Address}<br />
+                    <div>&nbsp; &nbsp; &nbsp; &nbsp;</div>
+                    <div> &nbsp; &nbsp; &nbsp; &nbsp; Email : {profile.Email}
                     </div>
+                    <br /><div> &nbsp; &nbsp; &nbsp; &nbsp; เบอร์โทรศัพท์ : {profile.Phonenumber}
+                        <br />
+                    </div>
+                    <div>&nbsp; &nbsp; &nbsp; &nbsp;
+                        <Box sx={{ minWidth: 120 }}>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
+                            <FormControl sx={{ width: 300 }}>
+                                <InputLabel id="demo-simple-select-label">สถานะการสั่งซื้อ</InputLabel>
+                                <Select
+                                    labelId="demo-simple-select-label"
+                                    id="demo-simple-select"
+                                    value={status}
+                                    label="สถานะการสั่งซื้อ"
+                                    onChange={handleChange}
+                                >
+                                    <MenuItem value={1}>ตรวจสอบยอดโอน</MenuItem>
+                                    <MenuItem value={2}>จัดทำสินค้า</MenuItem>
+                                    <MenuItem value={3}>เตรียมจัดส่งสินค้า</MenuItem>
+                                    <MenuItem value={4}>จัดส่งสินค้าเรียบร้อย</MenuItem>
+                                    <MenuItem value={5}>เกิดข้อผิดพลาด</MenuItem>
+                                </Select>
+                            </FormControl>
+                        </Box><br />
+                        <div> &nbsp; &nbsp; &nbsp; &nbsp;
+                            <input className={style.input299} placeholder="Tracking" type="Text" id="Name"
+                                onChange={(e) => setTrack(e.target.value)}  ></input>
+
+                        </div><br />
+                        <div>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
+                            <Button variant="contained" onClick={ShowImg} >
+                                ดูสลิปโอนเงิน
+                            </Button>
+                        </div>
+                    </div>
+                    <br /><div>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
+                        <button className={style.button33} onClick={sendData}> บันทึกข้อมูล</button></div>
+
+                </div>
+
+                <div className={style.container3}>
+                    <div className={style.loginbox59}>
+                        <h2 className={style.text} >ชื่อรองเท้า:  {profile.topic}</h2>
+                        <Canvas shadows dpr={[1, 2]} camera={{ position: [0, 2, 4], fov: 50 }}>
+                            <ambientLight intensity={0.7} />
+                            <spotLight intensity={0.5} angle={0.1} penumbra={1} position={[10, 15, 10]} castShadow />
+                            <Suspense fallback={null}>
+                                <Model />
+                                <Environment preset="city" />
+                                <ContactShadows rotation-x={Math.PI / 2} position={[0, -0.8, 0]} opacity={0.25} width={10} height={10} blur={1.5} far={0.8} />
+                            </Suspense>
+                            <OrbitControls />
+                        </Canvas>
+                        <div>
+                        </div>
+
+                    </div>
+                    <br />
                 </div>
             </div>
-        </div>
-
-    )
+        )
+    } else {
+        return (
+            <div>
+            </div>
+        )
+    }
 }

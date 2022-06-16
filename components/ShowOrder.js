@@ -351,7 +351,7 @@ export default function Custom(props) {
                         </div>
                     </div>
                     <br />
-                    <Button variant="contained" href="https://www.facebook.com/Shop-Custom-106916272054944/" target="_blank">
+                    <Button variant="contained" href="https://www.messenger.com/t/106916272054944" target="_blank">
                         <FacebookOutlinedIcon />
                         ติดต่อผู้ขาย
                     </Button>

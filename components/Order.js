@@ -12,6 +12,7 @@ import style from "../pages/register.module.css";
 import { Button } from '@mui/material'
 import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined';
 import Swal from "sweetalert2";
+import OrderTable from './OrderTable'
 
 export default function Buy(props) {
     const router = useRouter()
@@ -24,6 +25,13 @@ export default function Buy(props) {
     const [Address, setAddress] = useState("");
     const [image, setImage] = useState(null);
     const [url, setUrl] = useState("");
+    var today = new Date()
+    var minutes = today.getMinutes();
+    minutes = minutes > 9 ? minutes : '0' + minutes;
+    var sec = today.getSeconds()
+    sec = sec > 9 ? sec : '0' + sec;
+
+    var time = today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear() + '  ' + today.getHours() + ':' + minutes + ':' + sec;
     const handleUpload = () => {
         const uploadTask = firebase.storage().ref(`Bills/${image.name}`).put(image);
         uploadTask.on(
@@ -396,19 +404,17 @@ export default function Buy(props) {
                     if (result.isConfirmed) {
                         await firebase
                             .firestore()
-                            .collection('Order')
+                            .collection('Model')
                             .doc(id)
-                            .set({
-                                uid: user.id,
-                                NameShoe: profile.topic,
-                                Email: user.email,
-                                Type: "NIKE AIR FORCE1",
+                            .update({
                                 Name: Name + "  " + Surname,
                                 Phonenumber: PhoneNum,
                                 Address: Address,
                                 Billurl: url,
                                 Status: "1",
-                                Tracking: null
+                                Tracking: null,
+                                OrderTime: time,
+                                BuyStatus: true
                             }
                             )
                             .then(async () => {
@@ -433,6 +439,9 @@ export default function Buy(props) {
         }
     }
     if (profile) {
+        if (user.email != profile.Email) {
+            router.push("/")
+        }
         return (
             <div>
                 <br />

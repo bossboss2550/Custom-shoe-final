@@ -21,6 +21,7 @@ export default function Gridshoe() {
         firebase
             .firestore()
             .collection("Model")
+            .orderBy("Date", "asc")
             .get()
             .then(querySnapshot => {
                 const Data = []

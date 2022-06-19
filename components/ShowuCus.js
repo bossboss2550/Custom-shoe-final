@@ -70,7 +70,6 @@ export default function Gridshoe() {
                         </Box>
                     </Container>
                 </React.Fragment>
-
             </div>
 
         )

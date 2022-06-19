@@ -9,9 +9,10 @@ import { useUser } from '../auth/useUser'
 import 'firebase/storage'
 import { useEffect, useState } from 'react'
 import firebase from 'firebase/app'
+import MultiActionAreaCard3 from './Listcomplete';
 
 
-export default function Gridshoe() {
+export default function Completeshow() {
 
     const { user, logout } = useUser()
     const [profile, setProfile] = useState(null)
@@ -21,6 +22,8 @@ export default function Gridshoe() {
         firebase
             .firestore()
             .collection("Model")
+            .orderBy("OrderTime", "asc")
+            .where("OrderStatus", "==", true)
             .get()
             .then(querySnapshot => {
                 const Data = []
@@ -31,7 +34,6 @@ export default function Gridshoe() {
                         key: doc.id,
                     });
                 });
-
                 setProfile(Data)
             })
             .catch((error) => {
@@ -48,7 +50,7 @@ export default function Gridshoe() {
     if (user && profile) {
         const shoegridElements = profile.map((shoegrid, index) => {
             return <Grid item xs={3} key={shoegrid.key}>
-                <MultiActionAreaCard shoegrid={shoegrid} />
+                <MultiActionAreaCard3 shoegrid={shoegrid} />
             </Grid>
 
         })

@@ -62,7 +62,6 @@ export default function App2(props) {
         const material12 = new THREE.MeshBasicMaterial({ map: texture12 });
 
         const { nodes, materials } = useGLTF('/RT1.glb')
-        console.log(time)
         return (
 
             <group ref={group} {...props} dispose={null}>
@@ -359,7 +358,10 @@ export default function App2(props) {
                                 urltexup: Up,
                                 urltexdown: Down,
                                 urltexback: Back,
-                                Status: 0
+                                Status: 0,
+                                BuyStatus: false,
+                                EvaluateStatus: false
+
 
                             }
                             )

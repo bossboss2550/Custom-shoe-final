@@ -8,23 +8,23 @@ import ProfileCard from '../components/Profilecard';
 import style from "./register.module.css";
 import Variants from '../components/Varient';
 import Ordershow from '../components/Ordershow';
-import router from 'next/router';
+import Evaluateshow from '../components/Evaluate';
 
 export default function Profile() {
 
     const { user, logout } = useUser()
+
     if (user) {
         if (user.email == "admin@admin.com") {
             return (
                 < div >
 
-                    <Ordershow />
+                    <Evaluateshow />
 
                 </div >
 
             )
         } else return (
-
             < div >
             </div >
 

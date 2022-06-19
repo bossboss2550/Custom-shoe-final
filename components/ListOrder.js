@@ -87,7 +87,7 @@ export default function MultiActionAreaCard2(props) {
                         </Typography>
                         <Typography variant="body2" color="text.secondary">
                             {shoegrid.Type} <br /><br />
-                            {shoegrid.Email}
+                            เวลาที่สั่ง {shoegrid.OrderTime}
                         </Typography>
                     </CardContent>
                 </CardActionArea>
@@ -114,7 +114,7 @@ export default function MultiActionAreaCard2(props) {
                         </Typography>
                         <Typography variant="body2" color="text.secondary">
                             {shoegrid.Type} <br /><br />
-                            {shoegrid.Email}
+                            เวลาที่สั่ง {shoegrid.OrderTime}
                         </Typography>
                     </CardContent>
                 </CardActionArea>
@@ -141,7 +141,7 @@ export default function MultiActionAreaCard2(props) {
                         </Typography>
                         <Typography variant="body2" color="text.secondary">
                             {shoegrid.Type} <br /><br />
-                            {shoegrid.Email}
+                            เวลาที่สั่ง {shoegrid.OrderTime}
                         </Typography>
                     </CardContent>
                 </CardActionArea>
@@ -168,7 +168,7 @@ export default function MultiActionAreaCard2(props) {
                         </Typography>
                         <Typography variant="body2" color="text.secondary">
                             {shoegrid.Type} <br /><br />
-                            {shoegrid.Email}
+                            เวลาที่สั่ง {shoegrid.OrderTime}
                         </Typography>
                     </CardContent>
                 </CardActionArea>
@@ -199,7 +199,7 @@ export default function MultiActionAreaCard2(props) {
                         </Typography>
                         <Typography variant="body2" color="text.secondary">
                             {shoegrid.Type} <br /><br />
-                            {shoegrid.Email}
+                            เวลาที่สั่ง {shoegrid.OrderTime}
                         </Typography>
                     </CardContent>
                 </CardActionArea>
@@ -230,7 +230,7 @@ export default function MultiActionAreaCard2(props) {
                         </Typography>
                         <Typography variant="body2" color="text.secondary">
                             {shoegrid.Type} <br /><br />
-                            {shoegrid.Email}
+                            เวลาที่สั่ง {shoegrid.OrderTime}
                         </Typography>
                     </CardContent>
                 </CardActionArea>

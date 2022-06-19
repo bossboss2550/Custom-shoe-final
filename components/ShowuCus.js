@@ -21,13 +21,13 @@ export default function Gridshoe() {
         firebase
             .firestore()
             .collection("Model")
-            // .orderBy("Date", "desc")
+            .orderBy("Date", "asc")
             .where("Email", "==", user.email)
             .get()
             .then(querySnapshot => {
                 const Data = []
                 querySnapshot.forEach((doc, index) => {
-                    console.log(index, doc.data())
+                    // console.log(index, doc.data())
                     Data.push({
                         ...doc.data(),
                         key: doc.id,

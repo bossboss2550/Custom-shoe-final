@@ -26,6 +26,7 @@ export default function UpdateOrder(props) {
     const [track, setTrack] = useState("");
     const [status, setStatus] = React.useState("");
     const [buystatus, setBuystatus] = useState("");
+    const [OrderStatus, setOrderStatus] = useState("");
 
     var today = new Date()
     var minutes = today.getMinutes();
@@ -39,7 +40,12 @@ export default function UpdateOrder(props) {
         if (e.target.value === 0) {
             setStatus(e.target.value)
             setBuystatus(false)
-        } else {
+        } else if (e.target.value === 4) {
+            setStatus(e.target.value)
+            setBuystatus(false)
+            setOrderStatus(true)
+        }
+        else {
             setStatus(e.target.value)
             setBuystatus(true)
         }
@@ -385,7 +391,8 @@ export default function UpdateOrder(props) {
                             .update({
                                 Status: status,
                                 Tracking: track,
-                                BuyStatus: buystatus
+                                BuyStatus: buystatus,
+                                OrderStatus: OrderStatus
                             }
                             )
                             .then(async () => {
@@ -411,7 +418,6 @@ export default function UpdateOrder(props) {
     }
 
 
-    console.log(buystatus)
     if (profile) {
         if (user.email != "admin@admin.com") {
             router.push("/")
@@ -487,7 +493,7 @@ export default function UpdateOrder(props) {
                         </Canvas>
                         <div>
                         </div>
-
+                        <h4 className={style.text} >Size:  {profile.Size}  US</h4>
                     </div>
                     <br />
                 </div>

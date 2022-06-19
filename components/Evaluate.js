@@ -9,9 +9,10 @@ import { useUser } from '../auth/useUser'
 import 'firebase/storage'
 import { useEffect, useState } from 'react'
 import firebase from 'firebase/app'
+import MultiActionAreaCard2 from './ListEavluate';
 
 
-export default function Gridshoe() {
+export default function Evaluateshow() {
 
     const { user, logout } = useUser()
     const [profile, setProfile] = useState(null)
@@ -21,6 +22,8 @@ export default function Gridshoe() {
         firebase
             .firestore()
             .collection("Model")
+            .orderBy("EvaluateTime", "asc")
+            .where("EvaluateStatus", "==", true)
             .get()
             .then(querySnapshot => {
                 const Data = []
@@ -48,7 +51,7 @@ export default function Gridshoe() {
     if (user && profile) {
         const shoegridElements = profile.map((shoegrid, index) => {
             return <Grid item xs={3} key={shoegrid.key}>
-                <MultiActionAreaCard shoegrid={shoegrid} />
+                <MultiActionAreaCard2 shoegrid={shoegrid} />
             </Grid>
 
         })

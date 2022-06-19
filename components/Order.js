@@ -25,6 +25,7 @@ export default function Buy(props) {
     const [Address, setAddress] = useState("");
     const [image, setImage] = useState(null);
     const [url, setUrl] = useState("");
+    const [Size, setSize] = useState("");
     var today = new Date()
     var minutes = today.getMinutes();
     minutes = minutes > 9 ? minutes : '0' + minutes;
@@ -47,7 +48,6 @@ export default function Buy(props) {
                     .child(image.name)
                     .getDownloadURL()
                     .then(url => {
-                        console.log(url);
                         setUrl(url)
                         const reader = new FileReader()
                         reader.onload = (e) => {
@@ -414,7 +414,9 @@ export default function Buy(props) {
                                 Status: "1",
                                 Tracking: null,
                                 OrderTime: time,
-                                BuyStatus: true
+                                BuyStatus: true,
+                                Size: Size
+
                             }
                             )
                             .then(async () => {
@@ -440,7 +442,7 @@ export default function Buy(props) {
     }
     if (profile) {
         if (user.email != profile.Email) {
-            router.push("/")
+            // router.push("/")
         }
         return (
             <div>
@@ -459,6 +461,9 @@ export default function Buy(props) {
                     <br /><div> &nbsp; &nbsp; &nbsp; &nbsp;
                         <input className={style.input222} placeholder="เบอร์โทร" type="Text" id="Name" value={PhoneNum}
                             onChange={(e) => setPhoneNum(e.target.value)}  ></input>
+                        &nbsp; &nbsp; &nbsp;
+                        <input className={style.input2224} placeholder="Size" type="Text" id="Name" value={Size}
+                            onChange={(e) => setSize(e.target.value)}  ></input> US
                         <br />
                     </div><br />
                     <div>&nbsp; &nbsp; &nbsp; &nbsp;

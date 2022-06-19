@@ -75,9 +75,19 @@ export default function AccountMenu() {
                 Gallery
               </MenuItem>
             </Link>
+            <Link href='/CheckEvaluate' passHref>
+              <MenuItem>
+                Evaluate
+              </MenuItem>
+            </Link>
             <Link href='/CheckOrder' passHref>
               <MenuItem>
                 Order
+              </MenuItem>
+            </Link>
+            <Link href='/Ordercomplete' passHref>
+              <MenuItem>
+                Complete
               </MenuItem>
             </Link>
             <Divider />

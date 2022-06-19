@@ -22,18 +22,18 @@ export default function Ordershow() {
         firebase
             .firestore()
             .collection("Model")
+            .orderBy("OrderTime", "asc")
             .where("BuyStatus", "==", true)
             .get()
             .then(querySnapshot => {
                 const Data = []
                 querySnapshot.forEach((doc, index) => {
-                    console.log(index, doc.data())
+                    // console.log(index, doc.data())
                     Data.push({
                         ...doc.data(),
                         key: doc.id,
                     });
                 });
-                // console.log(Data)
                 setProfile(Data)
             })
             .catch((error) => {

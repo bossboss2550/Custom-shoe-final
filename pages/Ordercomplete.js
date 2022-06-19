@@ -6,25 +6,23 @@ import { useUser } from '../auth/useUser'
 import 'firebase/app'
 import ProfileCard from '../components/Profilecard';
 import style from "./register.module.css";
-import Variants from '../components/Varient';
-import Ordershow from '../components/Ordershow';
-import router from 'next/router';
+import Completeshow from '../components/Complete';
 
 export default function Profile() {
 
     const { user, logout } = useUser()
+
     if (user) {
         if (user.email == "admin@admin.com") {
             return (
                 < div >
 
-                    <Ordershow />
+                    <Completeshow />
 
                 </div >
 
             )
         } else return (
-
             < div >
             </div >
 
